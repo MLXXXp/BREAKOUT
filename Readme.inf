@@ -1,0 +1,21 @@
+BREAKOUT
+Not the crime of breaking-out-of-the-jail (although that is half of the meaning), the classic brickbreaker can bring hours of fun. Beat your friends' high score and reset them if you feel desperate. If you get tired, check out the SNAKE game (avilable mid-late March) for the other way to set the high score.
+In home screen:
+A_BUTTON to view Highscore
+B_BUTTON to start game
+if(game):
+LEFT_BUTTON to move left
+RIGHT_BUTTON to move right
+A_BUTTON to pause
+B_BUTTON to launch the ball(if it wasn't launched yet)
+while(pause):
+A_BUTTON to exit homescreen (if your friend want to destroy yur high score)
+B_BUTTON to continue having fun
+when viewing high score:
+A_BUTTON to return to home screen
+B_BUTTON to start having fun
+LEFT_BUTTON to initiate high-score erease
+if (state = 6) //high-score erease screen
+A_BUTTON to abort erease
+RIGHT_BUTTON + B_BUTTON to erease
+Open source project by Xavier
