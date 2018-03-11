@@ -18,4 +18,5 @@ LEFT_BUTTON to initiate high-score erease
 if (state = 6) //high-score erease screen
 A_BUTTON to abort erease
 RIGHT_BUTTON + B_BUTTON to erease
+Hidden featres: N/A (it is pretty straightforward, so who need the hidden perks and stuff anyway?)
 Open source project by Xavier
