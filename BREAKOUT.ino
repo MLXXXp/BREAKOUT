@@ -12,13 +12,13 @@ boolean isHit[ROWS][COLUMNS];   //Array of if bricks are hit or not
 boolean bounced=false;  //Used to fix double bounce glitch
 uint8_t lives = 3;       //Amount of lives
 uint8_t level = 1;       //Current level
-unsigned int score=0;   //Score for the game
+short score=0;   //Score for the game
 short brickCount;  //Amount of bricks hit
 char text[16];      //General string buffer
 char initials[3];     //Initials used in high score
 uint8_t hi, lo;
 char tmpInitials[3];
-unsigned int tmpScore = 0;
+short tmpScore = 0;
 
 
 #include <Arduboy.h>
@@ -246,6 +246,7 @@ void setup() {
   arduboy.begin();
   arduboy.setFrameRate(30);
   arduboy.display();
+  arduboy.initRandomSeed();
   if (arduboy.audio.enabled()) arduboy.audio.on();
   else arduboy.audio.off();
   arduboy.tunes.tone(987, 160);
