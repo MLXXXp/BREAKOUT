@@ -166,7 +166,7 @@ void Statistics() {
   arduboy.print(score);
   if (brickCount == ROWS * COLUMNS) {
     resetlevel();
-    score = score + level * 100;
+    score = score + level * 50;
     level = level + 1;
     if (level <= 5) lives = lives + 1;
   }
