@@ -137,7 +137,6 @@ void Brick() {
     }
 }
 void resetlevel() {
-  lives = 2;
   xPaddle = 39;
   brickCount = 0;
   Free = false;
