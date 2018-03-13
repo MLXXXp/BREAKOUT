@@ -277,6 +277,7 @@ void loop() {
         released = false;
         if (arduboy.audio.enabled()) arduboy.audio.off();
         else arduboy.audio.on();
+        arduboy.audio.saveOnOff();
       }
     }
     break;
@@ -389,6 +390,7 @@ void loop() {
       released = false;
       if (arduboy.audio.enabled()) arduboy.audio.off();
       else arduboy.audio.on();
+      arduboy.audio.saveOnOff();
     }
     break;
     
@@ -407,6 +409,7 @@ void loop() {
       released = false;
       if (arduboy.audio.enabled()) arduboy.audio.off();
       else arduboy.audio.on();
+        arduboy.audio.saveOnOff();
     }
     break;
     case 5:
