@@ -376,7 +376,7 @@ void loop() {
     case 5:
     arduboy.setCursor(14, HEIGHT / 2);
     arduboy.print("EREASE HIGHSCORE?");
-    if (arduboy.justPressed(RIGHT_BUTTON + B_BUTTON)) {
+    if (arduboy.justPressed(RIGHT_BUTTON) && arduboy.justPressed(LEFT_BUTTON)) {
       for (int i = 0; i < 70; i ++) {
         arduboy.clear();
         arduboy.setCursor(36,32);
