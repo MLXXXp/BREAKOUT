@@ -142,7 +142,7 @@ void resetlevel() {
 }
 void resetgame() {
   resetlevel();
-  level = 0;
+  level = 1;
   lives = 3;
   score = 0;
   state = 0;
