@@ -147,9 +147,9 @@ void resetGame() {
 void Statistics() {
   arduboy.setCursor(118, 15);
   arduboy.print(level);
-  arduboy.setCursor(118, 35);
+  arduboy.setCursor(118, 30);
   arduboy.print(lives);
-  arduboy.setCursor(112, 55);
+  arduboy.setCursor(112, 50);
   arduboy.print(score);
   if ((brickCount == ROWS * COLUMNS) && level < 2) {
     resetlevel();
