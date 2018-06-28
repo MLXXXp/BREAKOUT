@@ -19,8 +19,10 @@ int16_t brickCount;        //Amount of bricks hit
 char initials[3];          //Initials used in HSE
 bool flash = true;         //flashing of different items
 
-#include <Arduboy.h>
-Arduboy arduboy;
+#include <Arduboy2.h>
+#include <ArduboyPlaytune.h>
+Arduboy2 arduboy;
+ArduboyPlaytune tunes(arduboy.audio.enabled);
 
 
 void Paddle() {
@@ -42,11 +44,11 @@ void Ball() {
     if (ballY <= 1) {
       ballY = 1;
       moveY = -moveY;
-      arduboy.tunes.tone(523, 200);
+      tunes.tone(523, 200);
     }
     //Lose a life if bottom edge hit
     if (ballY >= HEIGHT) {
-      arduboy.tunes.tone(175, 200);
+      tunes.tone(175, 200);
       delay(250);
       ballY = 60;
       Free = false;
@@ -56,13 +58,13 @@ void Ball() {
     if (ballX < 1) {
       ballX = 1;
       moveX = -moveX;
-      arduboy.tunes.tone(523, 200);
+      tunes.tone(523, 200);
     }
     //Bounce off right side
     if (ballX > WIDTH - 20) {
       ballX = WIDTH - 20;
       moveX = -moveX;
-      arduboy.tunes.tone(523, 200);
+      tunes.tone(523, 200);
     }
     //Bounce off paddle
     if (ballX + 1 >= xPaddle && ballX <= xPaddle + 17 && ballY + 2 >= 63 && ballY <= 64) {
@@ -71,7 +73,7 @@ void Ball() {
       //limit horizontal speed
       if (moveX < -1.5) moveX = -1.5;
       if (moveX > 1.5)  moveX =  1.5;
-      arduboy.tunes.tone(200, 200);
+      tunes.tone(200, 200);
     }
     //Reset Bounce
     bounced = false;
@@ -111,7 +113,7 @@ void Brick() {
             if (!bounced) {
               moveY = - moveY;
               bounced = true;
-              arduboy.tunes.tone(261, 200);
+              tunes.tone(261, 200);
             }
           }
           //Hoizontal collision
@@ -120,7 +122,7 @@ void Brick() {
             if (!bounced) {
               moveX = - moveX;
               bounced = true;
-              arduboy.tunes.tone(261, 200);
+              tunes.tone(261, 200);
             }
           }
         }
@@ -180,7 +182,7 @@ void enterInitials() {
     delay(150);
     if (arduboy.pressed(LEFT_BUTTON) && released) {
       released = false;
-      arduboy.tunes.tone(1046, 200);
+      tunes.tone(1046, 200);
       index--;
       if (index < 0) index = 0;
     }
@@ -189,12 +191,12 @@ void enterInitials() {
       released = false;
       index++;
       if (index > 2) index = 2;
-      arduboy.tunes.tone(1046, 200);
+      tunes.tone(1046, 200);
     }
 
     if (arduboy.pressed(DOWN_BUTTON)) {
       initials[index]++;
-      arduboy.tunes.tone(523, 150);
+      tunes.tone(523, 150);
       // A-Z 0-9 :-? !-/ ' '
       if (initials[index] == '0') initials[index] = ' ';
       if (initials[index] == '!') initials[index] = 'A';
@@ -203,7 +205,7 @@ void enterInitials() {
     }
     if (arduboy.pressed(UP_BUTTON)) {
       initials[index]--;
-      arduboy.tunes.tone(523, 150);
+      tunes.tone(523, 150);
       if (initials[index] == ' ') initials[index] = '?';
       if (initials[index] == '/') initials[index] = 'Z';
       if (initials[index] == 31)  initials[index] = '/';
@@ -212,7 +214,7 @@ void enterInitials() {
     if (arduboy.pressed(A_BUTTON)) {
       if (index >= 2) {
         index = index + 1;
-        arduboy.tunes.tone(1046, 200);
+        tunes.tone(1046, 200);
       }
     }
     if (arduboy.notPressed(LEFT_BUTTON) && arduboy.notPressed(RIGHT_BUTTON))
@@ -226,13 +228,24 @@ void enterInitials() {
 void setup() {
   arduboy.begin();
   arduboy.setFrameRate(30);
+
+  // audio setup
+  tunes.initChannel(PIN_SPEAKER_1);
+#ifndef AB_DEVKIT
+  // if not a DevKit
+  tunes.initChannel(PIN_SPEAKER_2);
+#else
+  // if it's a DevKit
+  tunes.initChannel(PIN_SPEAKER_1); // use the same pin for both channels
+  tunes.toneMutesScore(true);       // mute the score when a tone is sounding
+#endif
+
   arduboy.display();
   arduboy.initRandomSeed();
-  if (arduboy.audio.enabled()) arduboy.audio.on();
-  else arduboy.audio.off();
-  arduboy.tunes.tone(987, 160);
+
+  tunes.tone(987, 160);
   delay(160);
-  arduboy.tunes.tone(1318, 400);
+  tunes.tone(1318, 400);
 }
 void loop() {
   if ((!arduboy.nextFrame())) return;
